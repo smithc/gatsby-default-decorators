@@ -1,7 +1,10 @@
-/**
- * Implement Gatsby's SSR (Server Side Rendering) APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/ssr-apis/
- */
-
-// You can delete this file if you're not using it
+// gatsby-ssr.js
+import { registerDecorator } from "webpack-decorators"
+// This code can be executed immediately
+const decorator = {
+  createElement: function (originalFunc, ...args) {
+    console.log("[decorator SSR]: Decorated React.createElement...")
+    return originalFunc(...args)
+  },
+}
+registerDecorator("react", decorator, "createElement")

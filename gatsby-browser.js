@@ -1,7 +1,13 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
+// gatsby-browser.js
+import { registerDecorator } from "webpack-decorators"
 
-// You can delete this file if you're not using it
+export const onClientEntry = () => {
+  const decorator = {
+    createElement: function (originalFunc, ...args) {
+      console.log("[decorator client]: Decorated React.createElement...")
+      return originalFunc(...args)
+    },
+  }
+
+  registerDecorator("react", decorator, "createElement")
+}

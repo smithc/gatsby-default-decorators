@@ -1,17 +1,3 @@
-const { registerDecorator } = require("webpack-decorators")
-const decorator = {
-  createElement: function (originalFunc, ...args) {
-    console.log("[decorator]: Decorated React.createElement...")
-    return originalFunc(...args)
-  },
-  Component: function (originalFunc, ...args) {
-    console.log("[decorator]: Decorated React.Component...")
-    return originalFunc(...args)
-  },
-}
-
-registerDecorator("react", decorator, "createElement", "Component")
-
 exports.onCreateWebpackConfig = gatsbyConfig => {
   gatsbyConfig.actions.setWebpackConfig({
     resolve: {
