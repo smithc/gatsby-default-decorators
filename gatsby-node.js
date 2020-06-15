@@ -1,7 +1,35 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+const { registerDecorator } = require("webpack-decorators")
+const decorator = {
+  createElement: function (originalFunc, ...args) {
+    console.log("[decorator]: Decorated React.createElement...")
+    return originalFunc(...args)
+  },
+  Component: function (originalFunc, ...args) {
+    console.log("[decorator]: Decorated React.Component...")
+    return originalFunc(...args)
+  },
+}
 
-// You can delete this file if you're not using it
+exports.onCreateWebpackConfig = gatsbyConfig => {
+  gatsbyConfig.actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        react$: require.resolve(`webpack-decorators-react`),
+        "___react-original___$": require.resolve(`react`),
+      },
+    },
+  })
+
+  gatsbyConfig.actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        "react-dom$": require.resolve(`webpack-decorators-react-dom`),
+        "___react-dom-original___$": require.resolve(`react-dom`),
+      },
+    },
+  })
+
+  registerDecorator("react", decorator, "createElement", "Component")
+
+  console.log("Webpack configurations created")
+}
