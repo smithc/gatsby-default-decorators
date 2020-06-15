@@ -10,6 +10,8 @@ const decorator = {
   },
 }
 
+registerDecorator("react", decorator, "createElement", "Component")
+
 exports.onCreateWebpackConfig = gatsbyConfig => {
   gatsbyConfig.actions.setWebpackConfig({
     resolve: {
@@ -28,8 +30,6 @@ exports.onCreateWebpackConfig = gatsbyConfig => {
       },
     },
   })
-
-  registerDecorator("react", decorator, "createElement", "Component")
 
   console.log("Webpack configurations created")
 }
