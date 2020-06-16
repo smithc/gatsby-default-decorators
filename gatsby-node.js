@@ -1,5 +1,13 @@
-exports.onCreateWebpackConfig = gatsbyConfig => {
-  gatsbyConfig.actions.setWebpackConfig({
+exports.onCreateWebpackConfig = ({ actions }, configOptions) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        "react-dom": "@hot-loader/react-dom",
+      },
+    },
+  })
+
+  actions.setWebpackConfig({
     resolve: {
       alias: {
         react$: require.resolve(`webpack-decorators-react`),
@@ -8,7 +16,7 @@ exports.onCreateWebpackConfig = gatsbyConfig => {
     },
   })
 
-  gatsbyConfig.actions.setWebpackConfig({
+  actions.setWebpackConfig({
     resolve: {
       alias: {
         "react-dom$": require.resolve(`webpack-decorators-react-dom`),
