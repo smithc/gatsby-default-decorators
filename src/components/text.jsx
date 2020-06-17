@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 
-export default () => {
+export default function Text(props) {
     useEffect(() => {
         function increment() {
             throw new Error("MYERROROSTIAS")

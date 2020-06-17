@@ -9,7 +9,7 @@ export const onClientEntry = () => {
 
       const type = args[0];
       const isFunc = typeof type === 'function';
-      const isProvider = isFunc && type.name === 'Provider';
+      const isProvider = isFunc && type.name === 'Text';
 
       if (isProvider || (args[0] === "div" && args[2] && args[2] === "This is a text")) {
         const element = elementFactory(
@@ -26,21 +26,18 @@ export const onClientEntry = () => {
 
     useEffect: function (originalFunc, ...args) {
       const [ effect, deps ] = args;
-      const callback = () => {
-        const asyncWrapper = async () => {
-          try {
-            await effect();
-          } catch(ex) {
-            console.error(ex);
-          }
-        };
-        
-        asyncWrapper();
+      const callback = () => {        
+        try {
+          return effect();
+        }
+        catch (ex) {
+          console.error(ex);
+        }
       };
 
       return originalFunc(callback, deps);
     }
   }
 
-  registerDecorator("react", decorator, "createElement", "useEffect");
+  registerDecorator("react", decorator, "createElement");
 }
