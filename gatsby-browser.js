@@ -9,7 +9,7 @@ export const onClientEntry = () => {
       if (args[0] === "div" && args[2] && args[2] === "This is a text") {
         return React.createElement(
           DecoratorComponent,
-          null,
+          { title: "cooperman" },
           originalFunc(...args) //text.jsx
         )
       }
