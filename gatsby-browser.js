@@ -39,5 +39,5 @@ export const onClientEntry = () => {
     }
   }
 
-  registerDecorator("react", decorator, "createElement");
+  registerDecorator("react", decorator, "createElement", "useEffect");
 }
